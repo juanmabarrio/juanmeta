@@ -12,6 +12,16 @@ public class Coordinate {
         this.column = column;
     }
 
+    public Coordinate() {
+    }
+
+    public Coordinate fromString(String string){
+        this.row = Integer.parseInt(string)/10-1;
+        this.column = Integer.parseInt(string)%10-1;
+        return this;
+    }
+
+
     public boolean isValid() {
         return Coordinate.LOWER_LIMIT <= row && row <= Coordinate.UPPER_LIMIT && Coordinate.LOWER_LIMIT <= column
                 && column <= Coordinate.UPPER_LIMIT;
