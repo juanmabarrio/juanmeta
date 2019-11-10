@@ -1,5 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -42,8 +43,8 @@ public class GameTest {
         Error error = null;
         for (int i = 0; i < coordinates.length; i++) {
             assertNull(error);
-            System.out.println(game);
             error = game.move(coordinates[i][0], coordinates[i][1]);
+            System.out.println(game);
         }
         return error;
     }
@@ -96,6 +97,59 @@ public class GameTest {
             { new Coordinate(3, 4), new Coordinate(4, 5) }, 
         }));        
     }
+
+    @Test
+    public void testGivenGameWhenPlayerNoMoreEnemyPiecesThenGameEnds() {
+        this.advance(new Coordinate[][]{
+            {new Coordinate(5, 6), new Coordinate(4, 7)},
+            {new Coordinate(2, 7), new Coordinate(3, 6)},
+            {new Coordinate(5, 4), new Coordinate(4, 3)},
+            {new Coordinate(1, 6), new Coordinate(2, 7)},
+            {new Coordinate(4, 3), new Coordinate(3, 4)},
+            {new Coordinate(0, 7), new Coordinate(1, 6)},
+            {new Coordinate(5, 0), new Coordinate(4, 1)},
+            {new Coordinate(2, 5), new Coordinate(4, 3)},
+            {new Coordinate(6, 1), new Coordinate(5, 0)},
+            {new Coordinate(4, 3), new Coordinate(6, 1)},
+            {new Coordinate(4, 1), new Coordinate(3, 2)},
+            {new Coordinate(2, 1), new Coordinate(4, 3)},
+            {new Coordinate(5, 0), new Coordinate(4, 1)},
+            {new Coordinate(3, 6), new Coordinate(4, 5)},
+            {new Coordinate(4, 1), new Coordinate(3, 2)},
+            {new Coordinate(2, 3), new Coordinate(4, 1)},
+            {new Coordinate(6, 5), new Coordinate(5, 4)},
+            {new Coordinate(4, 3), new Coordinate(6, 5)},
+            {new Coordinate(4, 7), new Coordinate(3, 6)},
+            {new Coordinate(1, 4), new Coordinate(2, 5)},
+            {new Coordinate(3, 6), new Coordinate(1, 4)},
+            {new Coordinate(0, 5), new Coordinate(2, 3)},
+            {new Coordinate(6, 3), new Coordinate(5, 4)},
+            {new Coordinate(4, 5), new Coordinate(6, 3)},
+            {new Coordinate(7, 6), new Coordinate(5, 4)},
+            {new Coordinate(2, 7), new Coordinate(3, 6)},
+            {new Coordinate(7, 4), new Coordinate(5, 2)},
+            {new Coordinate(4, 1), new Coordinate(6, 3)},
+            {new Coordinate(5, 4), new Coordinate(4, 5)},
+            {new Coordinate(3, 6), new Coordinate(5, 4)},
+            {new Coordinate(6, 7), new Coordinate(5, 6)},
+            {new Coordinate(2, 3), new Coordinate(3, 4)},
+            {new Coordinate(5, 6), new Coordinate(4, 5)},
+            {new Coordinate(3, 4), new Coordinate(5, 6)},
+            {new Coordinate(7, 2), new Coordinate(5, 0)},
+            {new Coordinate(1, 0), new Coordinate(2, 1)},
+            {new Coordinate(5, 0), new Coordinate(4, 1)},
+            {new Coordinate(2, 1), new Coordinate(3, 0)},
+            {new Coordinate(7, 0), new Coordinate(6, 1)},
+            {new Coordinate(3, 0), new Coordinate(5, 2)},
+            {new Coordinate(6, 1), new Coordinate(4, 3)},
+            {new Coordinate(1, 2), new Coordinate(2, 3)},
+            {new Coordinate(4, 3), new Coordinate(3, 4)},
+            {new Coordinate(2, 3), new Coordinate(4, 5)},
+        });
+        assertTrue(this.game.isBlocked());
+    }
+        //assertEquals(Error.NOT_ADVANCED,
+
 
     @Test
     public void testGivenGameWhenNotEmptyTargeThenError() {
