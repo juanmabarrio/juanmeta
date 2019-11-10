@@ -26,6 +26,10 @@ public class Session {
 		return this.game.move(origin, target);
 	}
 
+    public Error canMove(Coordinate origin, Coordinate target) {
+        return this.game.canMove(origin, target);
+    }
+
 	public Piece getPiece(Coordinate coordinate) {
 		return this.game.getPiece(coordinate);
 	}

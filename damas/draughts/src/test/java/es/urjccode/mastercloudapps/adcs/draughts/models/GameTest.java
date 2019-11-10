@@ -43,6 +43,11 @@ public class GameTest {
         Error error = null;
         for (int i = 0; i < coordinates.length; i++) {
             assertNull(error);
+            error = game.canMove(coordinates[i][0],coordinates[i][1]);
+            if (error!=null){
+                return error;
+
+            }
             error = game.move(coordinates[i][0], coordinates[i][1]);
             System.out.println(game);
         }
@@ -188,9 +193,11 @@ public class GameTest {
 
     @Test
     public void testGivenGameWhenMoveBadDistanceThenError() {
-        assertEquals(Error.BAD_DISTANCE, this.advance(new Coordinate[][] { 
+        assertEquals(Error.BAD_DISTANCE,this.advance(new Coordinate[][] {
+            { new Coordinate(5, 2), new Coordinate(4, 3) },
+            { new Coordinate(2, 3), new Coordinate(3, 4) },
             { new Coordinate(5, 0), new Coordinate(2, 3) },
-        })); 
+        }));
     }
 
 }

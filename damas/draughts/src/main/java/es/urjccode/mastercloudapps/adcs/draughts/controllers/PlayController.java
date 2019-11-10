@@ -13,11 +13,15 @@ public class PlayController extends Controller {
 	}
 
 	public Error move(Coordinate origin, Coordinate target){
-		Error error = this.session.move(origin, target);
+        Error error = this.session.canMove(origin, target);
+        if (error!=null){
+            return error;
+        }
+		this.session.move(origin, target);
 		if (this.session.isBlocked()){
 			this.session.next();
 		}
-		return error;
+		return null;
     }
 
 	public Piece getPiece(Coordinate coordinate) {
