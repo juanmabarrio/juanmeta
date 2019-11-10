@@ -148,7 +148,6 @@ public class GameTest {
         });
         assertTrue(this.game.isBlocked());
     }
-        //assertEquals(Error.NOT_ADVANCED,
 
 
     @Test
