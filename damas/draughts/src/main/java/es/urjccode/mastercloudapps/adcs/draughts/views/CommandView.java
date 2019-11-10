@@ -18,16 +18,19 @@ public class CommandView extends SubView {
         String color = CommandView.COLORS[playController.getColor().ordinal()];
         Error error = null;
         GameView gameView = new GameView();
+
         do {
-            String command = this.console.readString("Mueven las " + color + ": ");
-            Coordinate origin = new Coordinate().fromString(command.substring(0, 2));
-            Coordinate target = new Coordinate().fromString(command.substring(3, 5));
-            error = playController.move(origin, target);
+            CoordinateView coordinateView = new CoordinateView();
+            coordinateView.readCoordinate("Mueven las " + color + ": ");
+            //String command = this.console.readString("Mueven las " + color + ": ");
+            //Coordinate origin = new Coordinate().fromString(command.substring(0, 2));
+            //Coordinate target = new Coordinate().fromString(command.substring(3, 5));
+            error = playController.move(coordinateView.getOrigin(), coordinateView.getTarget());
             if (error != null){
                 console.writeln("Error!!!" + error.name());
             gameView.write(playController);
             }
-        } while (error != null); 
+        } while (error != null);
         if (playController.isBlocked()){
             this.console.write(CommandView.MESSAGE);
         }
