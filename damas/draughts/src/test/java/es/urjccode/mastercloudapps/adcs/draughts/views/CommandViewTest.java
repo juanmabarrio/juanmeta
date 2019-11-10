@@ -23,7 +23,7 @@ public class CommandViewTest {
     PlayController playController;
 
     @Mock
-    Console console;
+    CoordinateView coordinateView;
 
     @InjectMocks
     CommandView commandView;
@@ -36,9 +36,12 @@ public class CommandViewTest {
     @Test
     public void testInteract(){
         when(playController.getColor()).thenReturn(Color.BLACK);
-        when(console.readString("Mueven las negras: ")).thenReturn("32.41\n");
+        Coordinate origin = new Coordinate(2,1);
+        Coordinate target = new Coordinate(3, 0);
+        Coordinate[] coordinates = {origin,target};
+        when(coordinateView.readOriginAndTarget("Mueven las negras: ")).thenReturn(coordinates);
         commandView.interact(playController);
-        verify(playController).move(new Coordinate(2,1), new Coordinate(3, 0));
+        verify(playController).move(origin, target);
     }
 
 }
