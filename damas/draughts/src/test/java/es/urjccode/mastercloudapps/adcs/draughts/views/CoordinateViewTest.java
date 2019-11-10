@@ -2,8 +2,11 @@ package es.urjccode.mastercloudapps.adcs.draughts.views;
 
 import static junit.framework.TestCase.assertEquals;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,6 +39,15 @@ public class CoordinateViewTest {
         Coordinate[] shouldBe = {new Coordinate(2, 1), new Coordinate(3, 0)};
         assertEquals(shouldBe[0], coordinates[0]);
         assertEquals(shouldBe[1], coordinates[1]);
+
+    }
+
+    @Test
+    public void testReadIncorrectOriginAndTarget() {
+        String message = "Mueven las negras: ";
+        when(console.readString(message)).thenReturn("99.99\n").thenReturn("32.41\n");
+        coordinateView.readOriginAndTarget(message);
+        verify(console).writeln(Error.OUT_COORDINATE.name());
     }
 
 }

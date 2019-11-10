@@ -37,7 +37,7 @@ public class Game {
 	}
 
 	public Error move(Coordinate origin, Coordinate target) {
-	
+
 		if (board.isEmpty(origin)) {
 			return Error.EMPTY_ORIGIN;
 		}
