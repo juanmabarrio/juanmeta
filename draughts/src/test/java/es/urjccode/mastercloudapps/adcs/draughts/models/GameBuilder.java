@@ -45,9 +45,9 @@ public class GameBuilder{
 
     private Piece getPieceFromChar(Character character) {
         Map<Character,Piece> charToPieceMap = new HashMap<>();
-        charToPieceMap.put('b',new Piece(Color.WHITE));
+        charToPieceMap.put('b',new Pawn(Color.WHITE));
         charToPieceMap.put('B',new Draught(Color.WHITE));
-        charToPieceMap.put('n',new Piece(Color.BLACK));
+        charToPieceMap.put('n',new Pawn(Color.BLACK));
         charToPieceMap.put('N',new Draught(Color.BLACK));
         return charToPieceMap.get(character);
     }
