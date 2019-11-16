@@ -4,15 +4,11 @@ public class Game {
 
 
 
-	private Board board;
-	private Turn turn;
 
-	public Game(Board board, Turn turn) {
-		Game game = new Game();
-		game.board = board;
-		game.turn = turn;
+    private Board board;
 
-	}
+
+    private Turn turn;
 
 
 	public Game() {
@@ -28,6 +24,7 @@ public class Game {
 			}
 		}
 	}
+
 
 	private Piece getInitialPiece(Coordinate coordinate) {
 		assert coordinate != null;
@@ -97,4 +94,16 @@ public class Game {
 	public String toString() {
 		return this.board + "\n" + this.turn;
 	}
+
+
+
+    public void setBoard(Board board) {
+        this.board = board;
+    }
+
+
+    public void setTurn(Turn turn) {
+        this.turn = turn;
+    }
+
 }

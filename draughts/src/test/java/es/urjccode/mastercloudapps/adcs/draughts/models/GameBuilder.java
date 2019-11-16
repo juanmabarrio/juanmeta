@@ -37,7 +37,10 @@ public class GameBuilder{
         if (turn == null) {
             turn = new Turn();
         }
-        return new Game(board,turn);
+        Game game = new Game();
+        game.setBoard(board);
+        game.setTurn(turn);
+        return game;
     }
 
     private Piece getPieceFromChar(Character character) {
