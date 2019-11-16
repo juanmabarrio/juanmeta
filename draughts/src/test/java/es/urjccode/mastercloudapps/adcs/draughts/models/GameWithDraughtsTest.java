@@ -1,5 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -79,5 +81,23 @@ public class GameWithDraughtsTest {
         game.move(origin, target);
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
+    }
+
+
+    @Test
+    public void testGivenGameWhenDraughtMovingMoreThanTwoThenIsCorrect() {
+        Game game = new GameBuilder()
+                   .row("")
+                   .row("")
+                   .row("")
+                   .row("")
+                   .row("")
+                   .row("")
+                   .row("")
+                   .row("B")
+                   .turn(new Turn())
+                   .build();
+
+        assertNull(game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
     }
 }
