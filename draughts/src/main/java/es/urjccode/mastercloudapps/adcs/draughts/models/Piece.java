@@ -50,5 +50,4 @@ public class Piece {
 	Color getColor() {
 		return this.color;
 	}
-
 }

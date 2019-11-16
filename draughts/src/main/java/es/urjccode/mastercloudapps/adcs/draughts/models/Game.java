@@ -2,8 +2,18 @@ package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 public class Game {
 
+
+
 	private Board board;
 	private Turn turn;
+
+	public Game(Board board, Turn turn) {
+		Game game = new Game();
+		game.board = board;
+		game.turn = turn;
+
+	}
+
 
 	public Game() {
 		this.turn = new Turn();
@@ -87,5 +97,4 @@ public class Game {
 	public String toString() {
 		return this.board + "\n" + this.turn;
 	}
-
 }
