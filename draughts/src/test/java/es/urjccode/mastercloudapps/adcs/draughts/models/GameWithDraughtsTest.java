@@ -20,7 +20,7 @@ public class GameWithDraughtsTest {
 
     @Mock
     Piece piece;
-    
+
     @Mock
     Board board;
 
@@ -36,14 +36,14 @@ public class GameWithDraughtsTest {
     public void testGivenGameWhenWhitePawnAtLimitThenNewDraugts(){
         Coordinate origin = new Coordinate(1,0);
         Coordinate target = new Coordinate(0,1);
-        
+
         when (turn.getColor()).thenReturn(Color.WHITE);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
         when(board.getPiece(origin)).thenReturn(piece);
         when(piece.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
-        
+
         when(board.getPiece(target)).thenReturn(new Pawn(Color.WHITE));
         game.move(origin, target);
         verify(board).remove(target);
@@ -87,16 +87,16 @@ public class GameWithDraughtsTest {
     @Test
     public void testGivenGameWhenDraughtMovingMoreThanTwoThenIsCorrect() {
         Game game = new GameBuilder()
-                   .row("")
-                   .row("")
-                   .row("")
-                   .row("")
-                   .row("")
-                   .row("")
-                   .row("")
-                   .row("B")
-                   .turn(new Turn())
-                   .build();
+            .row("")
+            .row("")
+            .row("")
+            .row("")
+            .row("")
+            .row("")
+            .row("")
+            .row("B")
+            .turn(new Turn())
+            .build();
         assertNull(game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
     }
 
@@ -114,7 +114,7 @@ public class GameWithDraughtsTest {
             .turn(new Turn())
             .build();
         assertEquals(Error.TOO_MANY_PIECES_IN_BETWEEN
-                    ,game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
+            ,game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
     }
 
     @Test
@@ -168,3 +168,4 @@ public class GameWithDraughtsTest {
         assertEquals(Error.CANT_EAT_YOUR_PIECES,game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
     }
 }
+

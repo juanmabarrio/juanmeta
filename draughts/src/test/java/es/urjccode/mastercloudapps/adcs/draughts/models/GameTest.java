@@ -1,5 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -134,5 +135,23 @@ public class GameTest {
                     { new Coordinate(2, 3), new Coordinate(3, 2) },
                     { new Coordinate(5, 0), new Coordinate(2, 3) }, }));
     }
+
+
+    @Test
+    public void testIsBlocked(){
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("    n   ")
+            .row("     n n")
+            .row("      b ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .turn(new Turn())
+            .build();
+        assertTrue(game.isBlocked());
+    }
+
 
 }
