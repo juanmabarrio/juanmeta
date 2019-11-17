@@ -49,8 +49,10 @@ class Pawn extends Piece {
         Set<Integer> columnShifts = new HashSet<>();
         columnShifts.add(-1);
         columnShifts.add(1);
-        if (column==0) columnShifts.remove(-1);
-        if (column==board.getDimension()-1) columnShifts.remove(1);
+        if (column==0)
+            columnShifts.remove(-1);
+        if (column==board.getDimension()-1)
+            columnShifts.remove(1);
         //first level search.
         for (int columnShift: columnShifts) {
             piece = board.getPiece(new Coordinate(row + rowShift, column + columnShift));
@@ -62,8 +64,10 @@ class Pawn extends Piece {
             }
         }
         //second level search
-        if (column==1) columnShifts.remove(-1);
-        if (column==6) columnShifts.remove(1);
+        if (column==1)
+            columnShifts.remove(-1);
+        if (column==board.getDimension()-2)
+            columnShifts.remove(1);
         for (int columnShift: columnShifts) {
             piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + columnShift + columnShift));
             if (piece == null) {
