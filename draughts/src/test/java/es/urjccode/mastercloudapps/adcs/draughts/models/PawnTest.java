@@ -60,6 +60,25 @@ public class PawnTest {
         assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
     }
 
+    @Test
+    public void testIsBlackPawnBlockedWhenOnFirstColumnAndAnotherWhiteBlocking(){
+        Turn blackTurn = new Turn();
+        blackTurn.change();
+        Game game = new GameBuilder()
+            .row("n       ")
+            .row(" n      ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .turn(blackTurn)
+            .build();
+        Coordinate coordinate = new Coordinate(0,0);
+        assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
 
 
 }
