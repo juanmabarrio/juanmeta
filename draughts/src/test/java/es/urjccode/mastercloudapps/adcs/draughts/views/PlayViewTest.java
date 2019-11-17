@@ -19,6 +19,7 @@ import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 @RunWith(MockitoJUnitRunner.class)
 public class PlayViewTest {
 
+    final int DIMENSION = 8;
     @Mock
     PlayController playController;
 
@@ -37,6 +38,7 @@ public class PlayViewTest {
     public void testGivenPlayViewWhenCorrectFormatThenOk() {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(console.readString("Mueven las negras: ")).thenReturn("32.41");
+        when(playController.getDimension()).thenReturn(DIMENSION);
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
     }
@@ -45,6 +47,7 @@ public class PlayViewTest {
     public void testGivenPlayViewWhenInteractWithEmptyThenError() {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(console.readString("Mueven las negras: ")).thenReturn("").thenReturn("32.41");
+        when(playController.getDimension()).thenReturn(DIMENSION);
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
     }
@@ -53,6 +56,7 @@ public class PlayViewTest {
     public void testGivenPlayViewWhenInteractWithBadFormatThenError() {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(console.readString("Mueven las negras: ")).thenReturn("a3.42").thenReturn("32.41");
+        when(playController.getDimension()).thenReturn(DIMENSION);
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
     }
@@ -61,6 +65,7 @@ public class PlayViewTest {
     public void testGivenPlayViewWhenInteractWithBadRangeThenError() {
         when(playController.getColor()).thenReturn(Color.BLACK);
         when(console.readString("Mueven las negras: ")).thenReturn("93.49").thenReturn("32.41");
+        when(playController.getDimension()).thenReturn(DIMENSION);
         playView.interact(playController);
         verify(playController).move(new Coordinate(2, 1), new Coordinate(3, 0));
     }
