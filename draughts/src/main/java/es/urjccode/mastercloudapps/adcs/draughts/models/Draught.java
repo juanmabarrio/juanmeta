@@ -27,9 +27,7 @@ class Draught extends Piece {
     boolean isBlocked(PieceProvider board, Coordinate coordinate) {
         int row = coordinate.getRow();
         int column = coordinate.getColumn();
-        int rowShift;
         Piece piece;
-        rowShift = (this.getColor() == Color.BLACK) ? +1 : -1;
         Set<Integer> columnShifts = new HashSet<>();
         columnShifts.add(-1);
         columnShifts.add(1);
@@ -37,14 +35,23 @@ class Draught extends Piece {
             columnShifts.remove(-1);
         if (column == board.getDimension() - 1)
             columnShifts.remove(1);
+        Set<Integer> rowShifts = new HashSet<>();
+        rowShifts.add(-1);
+        rowShifts.add(1);
+        if (row == 0)
+            rowShifts.remove(-1);
+        if (row==board.getDimension()-1)
+            rowShifts.remove(1);
         //first level search.
         for (int columnShift : columnShifts) {
-            piece = board.getPiece(new Coordinate(row + rowShift, column + columnShift));
-            if (piece == null) {
-                return false;
-            }
-            if (piece.getColor() == this.getColor()) {
-                return true;
+            for (int rowShift: rowShifts) {
+                piece = board.getPiece(new Coordinate(row + rowShift, column + columnShift));
+                if (piece == null) {
+                    return false;
+                }
+                if (piece.getColor() == this.getColor()) {
+                    return true;
+                }
             }
         }
         //second level search
@@ -52,12 +59,20 @@ class Draught extends Piece {
             columnShifts.remove(-1);
         if (column == board.getDimension() - 2)
             columnShifts.remove(1);
+        if (row == 1)
+            columnShifts.remove(-1);
+        if (row == board.getDimension() - 2)
+            columnShifts.remove(1);
         for (int columnShift : columnShifts) {
-            piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + columnShift + columnShift));
-            if (piece == null) {
-                return false;
-            } else return true;
+            for (int rowShift : rowShifts) {
+                piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + columnShift + columnShift));
+                if (piece == null) {
+                    return false;
+                } else
+                    return true;
+            }
         }
+
         return false;
     }
 }
