@@ -37,6 +37,8 @@ class PlayView extends SubView {
         error = playController.isCorrect(origin, target);
         if (error == null){
             playController.move(origin, target);
+            GameView gameView = new GameView();
+            gameView.write(playController);
             if (playController.isBlocked()){
                 this.console.writeln(PlayView.MESSAGE);
             }
