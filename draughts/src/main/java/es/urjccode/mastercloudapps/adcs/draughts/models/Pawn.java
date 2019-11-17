@@ -1,5 +1,6 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class Pawn extends Piece {
@@ -42,11 +43,15 @@ class Pawn extends Piece {
     boolean isBlocked(PieceProvider board, Coordinate coordinate) {
         int row = coordinate.getRow();
         int column = coordinate.getColumn();
-        int rowShift,columnShift;
+        int rowShift;
         Piece piece;
         rowShift = (this.getColor() == Color.BLACK) ? +1 : -1;
-        if (column == 0 || column ==7) {
-            columnShift = (column == 0) ? +1 : -1;
+        List<Integer> columnShifts = new ArrayList<>();
+        columnShifts.add(-1);
+        columnShifts.add(1);
+        if (column==0) columnShifts.remove(0);
+        if (column==7) columnShifts.remove(1);
+        for (int columnShift: columnShifts){
             piece = board.getPiece(new Coordinate(row + rowShift, column + columnShift));
             if (piece == null) {
                 return false;
@@ -59,6 +64,8 @@ class Pawn extends Piece {
                 return false;
             } else return true;
         }
+
+
     return false;
     }
 }

@@ -61,7 +61,7 @@ public class PawnTest {
     }
 
     @Test
-    public void testIsBlackPawnBlockedWhenOnFirstColumnAndAnotherWhiteBlocking(){
+    public void testIsBlackPawnBlockedWhenOnFirstColumnAndAnotherBlackBlocking(){
         Turn blackTurn = new Turn();
         blackTurn.change();
         Game game = new GameBuilder()
@@ -134,7 +134,7 @@ public class PawnTest {
     }
 
     @Test
-    public void testIsBlackPawnBlockedWhenOnLastColumnAndAnotherWhiteBlocking(){
+    public void testIsBlackPawnBlockedWhenOnLastColumnAndAnotherBlackBlocking(){
         Turn blackTurn = new Turn();
         blackTurn.change();
         Game game = new GameBuilder()
@@ -149,6 +149,78 @@ public class PawnTest {
             .turn(blackTurn)
             .build();
         Coordinate coordinate = new Coordinate(0,7);
+        assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
+    @Test
+    public void testIsWhitePawnBlockedWhenOnSecondColumnAndEnemiesBlocking(){
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("    b   ")
+            .row("        ")
+            .row("        ")
+            .row("   n    ")
+            .row("n n     ")
+            .row(" b      ")
+            .row("        ")
+            .turn(new Turn())
+            .build();
+        Coordinate coordinate = new Coordinate(6,1);
+        assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
+    @Test
+    public void testIsBlackPawnBlockedWhenOnSecondColumnAndTwoEnemiesBlocking(){
+        Turn blackTurn = new Turn();
+        blackTurn.change();
+        Game game = new GameBuilder()
+            .row("        ")
+            .row(" n      ")
+            .row("b b     ")
+            .row("   b    ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .turn(blackTurn)
+            .build();
+        Coordinate coordinate = new Coordinate(1,1);
+        assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
+    @Test
+    public void testIsWhitePawnBlockedWhenOnSecondColumnAndAnotherWhiteBlocking(){
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("    b   ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("b b     ")
+            .row(" b      ")
+            .row("        ")
+            .turn(new Turn())
+            .build();
+        Coordinate coordinate = new Coordinate(6,1);
+        assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
+    @Test
+    public void testIsBlackPawnBlockedWhenOnSecondColumnAndAnotherBlackBlocking(){
+        Turn blackTurn = new Turn();
+        blackTurn.change();
+        Game game = new GameBuilder()
+            .row("        ")
+            .row(" n      ")
+            .row("n n     ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .turn(blackTurn)
+            .build();
+        Coordinate coordinate = new Coordinate(1,1);
         assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
     }
 
