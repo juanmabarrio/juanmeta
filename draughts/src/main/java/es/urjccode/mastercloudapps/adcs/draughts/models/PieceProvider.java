@@ -6,4 +6,6 @@ interface PieceProvider {
     Piece getPiece(Coordinate coordinate);
 
     boolean twoPiecesTogetherInBetween(Coordinate origin, Coordinate target);
+
+    boolean isThereAPieceOfThisColorInBetween(Color color, Coordinate origin, Coordinate target);
 }

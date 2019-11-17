@@ -17,6 +17,7 @@ class Board implements PieceProvider {
         }
     }
 
+    @Override
     public boolean twoPiecesTogetherInBetween(Coordinate origin, Coordinate target){
         assert origin!=null && target!=null;
         Coordinate coordinate;
@@ -50,6 +51,40 @@ class Board implements PieceProvider {
         while(target.diagonalDistance(coordinate) > 0);
         return false;
     }
+
+    @Override
+    public boolean isThereAPieceOfThisColorInBetween(Color color, Coordinate origin, Coordinate target) {
+        assert origin!=null && target!=null;
+        Coordinate coordinate;
+        Piece piece = null;
+        int rowShift =0;
+        int columnShift = 0;
+
+        do {
+            if (origin.getRow() > target.getRow()) {
+                rowShift--;
+            }
+            else{
+                rowShift++;
+            }
+            if (origin.getColumn() > target.getColumn()) {
+                columnShift--;
+            }
+            else{
+                columnShift++;
+            }
+
+            coordinate = new Coordinate(origin.getRow() + rowShift, origin.getColumn() + columnShift);
+            piece = this.getPiece(coordinate);
+            if (piece != null && piece.getColor().equals(color)){
+                return true;
+            }
+
+        }
+        while(target.diagonalDistance(coordinate) > 0);
+        return false;
+    }
+
 
     private Square getSquare(Coordinate coordinate){
         assert coordinate!=null;
