@@ -118,8 +118,8 @@ class Board implements PieceProvider {
     Color getColor(Coordinate coordinate) {
         return this.getSquare(coordinate).getColor();
     }
-
-    List<Piece> getPieces(Color color) {
+    @Override
+    public List<Piece> getPieces(Color color) {
         List<Piece> pieces = new ArrayList<Piece>();
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
@@ -132,8 +132,9 @@ class Board implements PieceProvider {
         }
 		return pieces;
 	}
-    
-    int getDimension() {
+
+	@Override
+    public int getDimension() {
 		return Board.DIMENSION;
 	}
 

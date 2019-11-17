@@ -1,5 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import java.util.List;
+
 class Pawn extends Piece {
 
     private static final int MAX_DISTANCE = 2;
@@ -18,14 +20,14 @@ class Pawn extends Piece {
         return difference < 0;
     }
 
-    Error isCorrectMoveForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider){
+    Error isCorrectMoveForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
         int distance = origin.diagonalDistance(target);
         if (!this.isAdvanced(origin, target)) {
             return Error.NOT_ADVANCED;
         }
 
-        if (distance > Pawn.MAX_DISTANCE){
-           return Error.BAD_DISTANCE;
+        if (distance > Pawn.MAX_DISTANCE) {
+            return Error.BAD_DISTANCE;
         }
 
         if (distance == Pawn.MAX_DISTANCE) {
@@ -37,7 +39,32 @@ class Pawn extends Piece {
         return null;
     }
 
-    boolean isBlocked(){
+    boolean isBlocked(PieceProvider board, Coordinate coordinate) {
+        int row = coordinate.getRow();
+        int column = coordinate.getColumn();
+        int rowShift;
+        Piece piece;
+        rowShift = (this.getColor() == Color.BLACK) ? +1 : -1;
+        if (column == 0) {
+            piece = board.getPiece(new Coordinate(row + rowShift, column + 1));
+            if (piece == null) {
+                return false;
+            }
+            if (piece.getColor() == this.getColor()) {
+                return true;
+            }
+            piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + 2));
+            if (piece == null) {
+                return false;
+            } else return true;
+        }
+//            if (column == 7){
+//                piece = board.getPiece(new Coordinate(row-1,column-1));
+//                if (piece == null){
+//                    return false;
+//                }
+//
+//            }
     return false;
     }
 }

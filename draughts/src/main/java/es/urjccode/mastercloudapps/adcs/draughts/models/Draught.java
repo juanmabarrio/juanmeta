@@ -22,7 +22,7 @@ class Draught extends Piece {
     }
 
     @Override
-    boolean isBlocked() {
+    boolean isBlocked(PieceProvider board, Coordinate coordinate) {
         return false;
     }
 }

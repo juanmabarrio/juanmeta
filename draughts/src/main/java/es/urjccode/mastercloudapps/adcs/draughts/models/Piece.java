@@ -32,5 +32,5 @@ public abstract class Piece {
         return this.color;
     }
 
-    abstract boolean isBlocked();
+    abstract boolean isBlocked(PieceProvider board, Coordinate coordinate);
 }
