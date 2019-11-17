@@ -16,7 +16,7 @@ public class PlayController extends Controller {
 	public void move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
 		this.game.move(origin, target);
-		if (this.game.isBlocked()) {
+		if (this.game.noMorePiecesLeft()) {
 			this.state.next();
 		}
 	}
@@ -37,7 +37,7 @@ public class PlayController extends Controller {
 	}
 
 	public boolean isBlocked() {
-		return this.game.isBlocked();
+		return this.game.noMorePiecesLeft();
 	}
 
 	@Override
