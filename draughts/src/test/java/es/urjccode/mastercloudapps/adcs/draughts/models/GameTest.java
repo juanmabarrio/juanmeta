@@ -160,14 +160,14 @@ public class GameTest {
             .row("        ")
             .row("    n   ")
             .row("     n n")
-            .row("      b ")
+            .row("        ")
             .row("        ")
             .row("        ")
             .row("        ")
             .row("        ")
             .turn(turn)
             .build();
-        assertTrue(game.noMorePiecesLeft(turn.getColor()));
+        assertTrue(game.noMorePiecesLeft());
     }
 
 }

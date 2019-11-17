@@ -109,7 +109,7 @@ public class Game {
         this.turn = turn;
     }
 
-    public boolean noMorePiecesLeft(Color color) {
-	    return false;
+    public boolean noMorePiecesLeft() {
+        return this.board.getPieces(this.turn.getColor()).isEmpty();
     }
 }
