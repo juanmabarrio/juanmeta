@@ -41,5 +41,43 @@ public class DraughtTest {
         assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
     }
 
+    @Test
+    public void testIsBlackDraughtNotBlockedWhenOnSecondRowAndSpaceBehind() {
+        Turn blackTurn = new Turn ();
+        blackTurn.change();
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("b   b   ")
+            .row(" b b    ")
+            .row("  N     ")
+            .row("        ")
+            .row("        ")
+            .turn(blackTurn)
+            .build();
+        Coordinate coordinate = new Coordinate(5, 2);
+        assertFalse(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
+    @Test
+    public void testIsBlackDraughtBlockedWhenSorroundedWithEnemies() {
+        Turn blackTurn = new Turn ();
+        blackTurn.change();
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("b   b   ")
+            .row(" b b    ")
+            .row("  N     ")
+            .row(" b b    ")
+            .row("b   b   ")
+            .turn(blackTurn)
+            .build();
+        Coordinate coordinate = new Coordinate(5, 2);
+        assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
 
 }
