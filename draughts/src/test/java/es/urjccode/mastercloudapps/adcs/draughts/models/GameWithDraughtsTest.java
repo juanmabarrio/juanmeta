@@ -97,7 +97,6 @@ public class GameWithDraughtsTest {
                    .row("B")
                    .turn(new Turn())
                    .build();
-
         assertNull(game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
     }
 }

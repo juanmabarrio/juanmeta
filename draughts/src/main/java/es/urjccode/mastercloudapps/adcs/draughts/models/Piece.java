@@ -18,16 +18,15 @@ public abstract class Piece {
 			return Error.NOT_EMPTY_TARGET;
 		}
 
-		return this.isCorrectMovementForMyTypeOfPiece(origin, target,pieceProvider);
+		return this.isCorrectMoveForMyTypeOfPiece(origin, target,pieceProvider);
 	}
 
     boolean isLimit(Coordinate coordinate){
         return coordinate.getRow()== 0 && this.getColor() == Color.WHITE ||
             coordinate.getRow()== 7 && this.getColor() == Color.BLACK;
     }
-    abstract boolean isAdvanced(Coordinate origin, Coordinate target);
 
-    abstract Error isCorrectMovementForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider);
+    abstract Error isCorrectMoveForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider);
 
     Color getColor() {
         return this.color;

@@ -7,16 +7,13 @@ class Draught extends Piece {
     }
 
 
-    boolean isAdvanced(Coordinate origin, Coordinate target) {
-        assert origin != null;
-        assert target != null;
-        int difference = origin.getRow() - target.getRow();
-        return difference != 0;
-    }
 
+    Error isCorrectMoveForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider) {
 
-
-    Error isCorrectMovementForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider){
-        return null;
+      int distance = origin.diagonalDistance(target);
+      if (distance > 2 && pieceProvider.twoPiecesTogetherInBetween(origin,target)){
+          return Error.TOO_MANY_PIECES_IN_BETWEEN;
+      }
+      return null;
     }
 }

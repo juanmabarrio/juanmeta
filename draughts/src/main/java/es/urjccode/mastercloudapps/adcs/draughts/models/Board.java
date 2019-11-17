@@ -17,6 +17,40 @@ class Board implements PieceProvider {
         }
     }
 
+    public boolean twoPiecesTogetherInBetween(Coordinate origin, Coordinate target){
+        assert origin!=null && target!=null;
+        Coordinate coordinate;
+        Piece currentPiece = null;
+        Piece previousPiece;
+        int rowShift =0;
+        int columnShift = 0;
+
+        do {
+            previousPiece = currentPiece;
+            if (origin.getRow() > target.getRow()) {
+                rowShift--;
+            }
+            else{
+                rowShift++;
+            }
+            if (origin.getColumn() > target.getColumn()) {
+                columnShift--;
+            }
+            else{
+                columnShift++;
+            }
+
+            coordinate = new Coordinate(origin.getRow() + rowShift, origin.getColumn() + columnShift);
+            currentPiece = this.getPiece(coordinate);
+            if (previousPiece != null && currentPiece != null){
+                return true;
+            }
+
+        }
+        while(target.diagonalDistance(coordinate) > 0);
+        return false;
+    }
+
     private Square getSquare(Coordinate coordinate){
         assert coordinate!=null;
         return this.squares[coordinate.getRow()][coordinate.getColumn()];

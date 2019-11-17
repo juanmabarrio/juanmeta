@@ -18,7 +18,7 @@ class Pawn extends Piece {
         return difference < 0;
     }
 
-    Error isCorrectMovementForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider){
+    Error isCorrectMoveForMyTypeOfPiece(Coordinate origin, Coordinate target, PieceProvider pieceProvider){
         int distance = origin.diagonalDistance(target);
         if (!this.isAdvanced(origin, target)) {
             return Error.NOT_ADVANCED;
