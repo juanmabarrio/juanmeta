@@ -1,7 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 class Pawn extends Piece {
 
@@ -46,12 +46,13 @@ class Pawn extends Piece {
         int rowShift;
         Piece piece;
         rowShift = (this.getColor() == Color.BLACK) ? +1 : -1;
-        List<Integer> columnShifts = new ArrayList<>();
+        Set<Integer> columnShifts = new HashSet<>();
         columnShifts.add(-1);
         columnShifts.add(1);
-        if (column==0) columnShifts.remove(0);
-        if (column==7) columnShifts.remove(1);
-        for (int columnShift: columnShifts){
+        if (column==0) columnShifts.remove(-1);
+        if (column==board.getDimension()-1) columnShifts.remove(1);
+        //first level search.
+        for (int columnShift: columnShifts) {
             piece = board.getPiece(new Coordinate(row + rowShift, column + columnShift));
             if (piece == null) {
                 return false;
@@ -59,13 +60,16 @@ class Pawn extends Piece {
             if (piece.getColor() == this.getColor()) {
                 return true;
             }
+        }
+        //second level search
+        if (column==1) columnShifts.remove(-1);
+        if (column==6) columnShifts.remove(1);
+        for (int columnShift: columnShifts) {
             piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + columnShift + columnShift));
             if (piece == null) {
                 return false;
             } else return true;
         }
-
-
     return false;
     }
 }
