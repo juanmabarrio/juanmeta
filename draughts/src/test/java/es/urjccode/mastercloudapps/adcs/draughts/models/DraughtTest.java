@@ -79,5 +79,22 @@ public class DraughtTest {
         assertTrue(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
     }
 
+    @Test
+    public void testIsWhiteDraughtNotBlockedWhenSorroundedWithEnemiesButWithOneEscape() {
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("n   n   ")
+            .row(" n n    ")
+            .row("  B     ")
+            .row(" n n    ")
+            .row("n       ")
+            .turn(new Turn())
+            .build();
+        Coordinate coordinate = new Coordinate(5, 2);
+        assertFalse(game.getPiece(coordinate).isBlocked(game.getBoard(), coordinate));
+    }
+
 
 }
