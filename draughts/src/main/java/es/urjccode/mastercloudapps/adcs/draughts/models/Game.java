@@ -77,9 +77,12 @@ public class Game {
 		return this.turn.getColor();
 	}
 
+
 	public boolean isBlocked() {
 		return this.board.getPieces(this.turn.getColor()).isEmpty();
 	}
+
+
 
 	public int getDimension() {
 		return this.board.getDimension();
@@ -106,4 +109,7 @@ public class Game {
         this.turn = turn;
     }
 
+    public boolean noMorePiecesLeft(Color color) {
+	    return false;
+    }
 }

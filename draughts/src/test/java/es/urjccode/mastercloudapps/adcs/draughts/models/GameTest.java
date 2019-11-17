@@ -153,5 +153,21 @@ public class GameTest {
         assertTrue(game.isBlocked());
     }
 
+    @Test
+    public void testNoMorePiecesLeft(){
+        Turn turn =new Turn();
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("    n   ")
+            .row("     n n")
+            .row("      b ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .turn(turn)
+            .build();
+        assertTrue(game.noMorePiecesLeft(turn.getColor()));
+    }
 
 }
