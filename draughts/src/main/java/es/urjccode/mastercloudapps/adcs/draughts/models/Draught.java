@@ -20,4 +20,9 @@ class Draught extends Piece {
 
       return null;
     }
+
+    @Override
+    boolean isBlocked() {
+        return false;
+    }
 }

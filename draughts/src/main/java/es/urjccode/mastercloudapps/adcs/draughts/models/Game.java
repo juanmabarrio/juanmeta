@@ -1,5 +1,8 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Game {
 
 
@@ -79,7 +82,9 @@ public class Game {
 
 
 	public boolean isBlocked() {
-		return this.board.getPieces(this.turn.getColor()).isEmpty();
+	     List<Piece> pieces = this.board.getPieces(this.turn.getColor());
+	     return (pieces.size()>0 &&
+             pieces.stream().filter(Piece::isBlocked).count()==pieces.size());
 	}
 
 

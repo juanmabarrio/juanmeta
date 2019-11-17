@@ -37,4 +37,7 @@ class Pawn extends Piece {
         return null;
     }
 
+    boolean isBlocked(){
+    return false;
+    }
 }

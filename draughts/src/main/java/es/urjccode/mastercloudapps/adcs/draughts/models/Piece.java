@@ -32,4 +32,5 @@ public abstract class Piece {
         return this.color;
     }
 
+    abstract boolean isBlocked();
 }
