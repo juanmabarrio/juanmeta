@@ -42,29 +42,23 @@ class Pawn extends Piece {
     boolean isBlocked(PieceProvider board, Coordinate coordinate) {
         int row = coordinate.getRow();
         int column = coordinate.getColumn();
-        int rowShift;
+        int rowShift,columnShift;
         Piece piece;
         rowShift = (this.getColor() == Color.BLACK) ? +1 : -1;
-        if (column == 0) {
-            piece = board.getPiece(new Coordinate(row + rowShift, column + 1));
+        if (column == 0 || column ==7) {
+            columnShift = (column == 0) ? +1 : -1;
+            piece = board.getPiece(new Coordinate(row + rowShift, column + columnShift));
             if (piece == null) {
                 return false;
             }
             if (piece.getColor() == this.getColor()) {
                 return true;
             }
-            piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + 2));
+            piece = board.getPiece(new Coordinate(row + rowShift + rowShift, column + columnShift + columnShift));
             if (piece == null) {
                 return false;
             } else return true;
         }
-//            if (column == 7){
-//                piece = board.getPiece(new Coordinate(row-1,column-1));
-//                if (piece == null){
-//                    return false;
-//                }
-//
-//            }
     return false;
     }
 }
