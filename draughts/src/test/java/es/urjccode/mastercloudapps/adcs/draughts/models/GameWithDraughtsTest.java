@@ -99,4 +99,72 @@ public class GameWithDraughtsTest {
                    .build();
         assertNull(game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
     }
+
+    @Test
+    public void testGivenGameWhenDraughtMovingMoreThanTwoButThereAreTwoPiecesTogetherInTheDiagonalThenError() {
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("  n     ")
+            .row(" n      ")
+            .row("B       ")
+            .turn(new Turn())
+            .build();
+        assertEquals(Error.TOO_MANY_PIECES_IN_BETWEEN
+                    ,game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
+    }
+
+    @Test
+    public void testGivenGameWhenDraughtMovingMoreThanTwoSquaresButThereIsOnePieceSameColorInBetweenTogetherInTheDiagonalThenError() {
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("  n     ")
+            .row(" n      ")
+            .row("B       ")
+            .turn(new Turn())
+            .build();
+        assertEquals(Error.TOO_MANY_PIECES_IN_BETWEEN
+            ,game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
+    }
+
+    @Test
+    public void testGivenGameWhenDraughtMovingMoreThanTwoSquaresButThereIsOneEnemyPieceInTheDiagonalThenOK() {
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("      n ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("B       ")
+            .turn(new Turn())
+            .build();
+        assertNull(game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
+    }
+
+    @Test
+    public void testGivenGameWhenDraughtMovingMoreThanTwoSquaresButOneOfMyPiecesInTheDiagonalThenError() {
+        Turn turn = new Turn();
+        turn.change();
+        Game game = new GameBuilder()
+            .row("        ")
+            .row("      n ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("        ")
+            .row("N       ")
+            .turn(turn)
+            .build();
+        assertEquals(Error.CANT_EAT_YOUR_PIECES,game.isCorrect(new Coordinate(7,0),new Coordinate(0,7)));
+    }
 }
