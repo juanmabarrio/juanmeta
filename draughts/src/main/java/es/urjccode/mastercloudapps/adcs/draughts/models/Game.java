@@ -84,21 +84,18 @@ public class Game {
         Color color = this.turn.getColor();
         List<Piece> pieces = this.board.getPieces(color);
         if (pieces.size()==0) return false;
-        if (color == Color.WHITE){
+
             for (int i = 0; i < this.board.getDimension(); i++) {
                 for (int j = 0; j < this.board.getDimension(); j++) {
                     Piece piece = this.board.getPiece(new Coordinate(i,j));
                     if (piece != null && piece.getColor()==color){
-                        if (false == piece.isBlocked(this.board,new Coordinate(i,j))){
+                        if (!piece.isBlocked(this.board,new Coordinate(i,j))){
                             return false;
                         }
-
                     }
                 }
             }
-        }
-
-        return false;
+        return true;
     }
 
 
